@@ -1,2 +1,2 @@
 # HCMUS
-HCMUS's projects
+HCMUS's projects and exercises
