@@ -11,7 +11,6 @@ void hashTable<K, V>::release() {
   for (int i = 0; i < capacity; i++) {
     if (table[i] != nullptr) {
       delete table[i];
-      table[i] = nullptr;
     }
   }
 }
@@ -43,8 +42,10 @@ void hashTable<K, V>::add(K key, V value) {
 
   unsigned int index = hashFunction(key);
   unsigned int startIndex = index;
+  int i = 1;
   while (table[index] != nullptr) {
-    index = (index + 1) % capacity;
+    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    i++;
     if (index == startIndex) {
       throw runtime_error("Hash table is full.");
     }
@@ -60,8 +61,10 @@ V* hashTable<K, V>::searchValue(K key) {
 
   unsigned int index = hashFunction(key);
   unsigned int startIndex = index;
+  int i = 1;
   while (table[index] != nullptr && table[index]->key != key) {
-    index = (index + 1) % capacity;
+    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    i++;
     if (index == startIndex) {
       return nullptr;
     }
@@ -80,8 +83,10 @@ void hashTable<K, V>::removeKey(K key) {
 
   unsigned int index = hashFunction(key);
   unsigned int startIndex = index;
+  int i = 1;
   while (table[index] != nullptr && table[index]->key != key) {
-    index = (index + 1) % capacity;
+    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    i++;
     if (index == startIndex) {
       return;
     }

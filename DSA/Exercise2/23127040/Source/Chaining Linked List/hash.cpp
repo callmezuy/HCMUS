@@ -40,16 +40,16 @@ void hashTable<K, V>::add(K key, V value) {
   if (table.empty()) {
     throw runtime_error("Hash table is not initialized.");
   }
-
   unsigned int index = hashFunction(key);
-  unsigned int startIndex = index;
-  while (table[index] != nullptr) {
-    index = (index + 1) % capacity;
-    if (index == startIndex) {
-      throw runtime_error("Hash table is full.");
+  if (table[index] == nullptr) {
+    table[index] = new hashNode{key, value, nullptr};
+  } else {
+    hashNode* temp = table[index];
+    while (temp->next != nullptr) {
+      temp = temp->next;
     }
+    temp->next = new hashNode{key, value, nullptr};
   }
-  table[index] = new hashNode{key, value};
 }
 
 template <typename K, typename V>
@@ -57,19 +57,15 @@ V* hashTable<K, V>::searchValue(K key) {
   if (table.empty()) {
     return nullptr;
   }
-
   unsigned int index = hashFunction(key);
-  unsigned int startIndex = index;
-  while (table[index] != nullptr && table[index]->key != key) {
-    index = (index + 1) % capacity;
-    if (index == startIndex) {
-      return nullptr;
+  hashNode* temp = table[index];
+  while (temp != nullptr) {
+    if (temp->key == key) {
+      return &temp->value;
     }
+    temp = temp->next;
   }
-  if (table[index] == nullptr) {
-    return nullptr;
-  }
-  return &table[index]->value;
+  return nullptr;
 }
 
 template <typename K, typename V>
@@ -77,18 +73,23 @@ void hashTable<K, V>::removeKey(K key) {
   if (table.empty()) {
     return;
   }
-
   unsigned int index = hashFunction(key);
-  unsigned int startIndex = index;
-  while (table[index] != nullptr && table[index]->key != key) {
-    index = (index + 1) % capacity;
-    if (index == startIndex) {
-      return;
-    }
-  }
-  if (table[index] == nullptr) {
+  hashNode* temp = table[index];
+  if (temp == nullptr) {
     return;
   }
-  delete table[index];
-  table[index] = nullptr;
+  if (temp->key == key) {
+    table[index] = temp->next;
+    delete temp;
+    return;
+  }
+  while (temp->next != nullptr) {
+    if (temp->next->key == key) {
+      hashNode* toDelete = temp->next;
+      temp->next = temp->next->next;
+      delete toDelete;
+      return;
+    }
+    temp = temp->next;
+  }
 }

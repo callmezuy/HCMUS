@@ -9,6 +9,7 @@ struct hashTable {
   struct hashNode {
     K key;
     V value;
+    hashNode* next;
   };
 
   int capacity;
