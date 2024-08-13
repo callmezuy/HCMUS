@@ -17,6 +17,33 @@ void hashTable<K, V>::release() {
 }
 
 template <typename K, typename V>
+void hashTable<K, V>::display() {
+  const int indexWidth = 7;
+  const int keyWidth = 20;
+  const int valueWidth = 20;
+  const int totalWidth = indexWidth + keyWidth + valueWidth + 4;
+
+  cout << "+" << string(totalWidth - 2, '-') << "+" << endl;
+
+  cout << "|" << left << setw(indexWidth) << "Index"
+       << "|" << left << setw(keyWidth) << "Key"
+       << "|" << left << setw(valueWidth) << "Value"
+       << "|" << endl;
+
+  cout << "+" << string(totalWidth - 2, '-') << "+" << endl;
+
+  for (int i = 0; i < capacity; i++) {
+    if (table[i] != nullptr) {
+      cout << "|" << left << setw(indexWidth) << i << "|" << left
+           << setw(keyWidth) << table[i]->key << "|" << left << setw(valueWidth)
+           << table[i]->value << "|" << endl;
+    }
+  }
+
+  cout << "+" << string(totalWidth - 2, '-') << "+" << endl;
+}
+
+template <typename K, typename V>
 unsigned int hashTable<K, V>::hashFunction(int key) {
   return key % capacity;
 }
@@ -43,13 +70,43 @@ void hashTable<K, V>::add(K key, V value) {
 
   unsigned int index = hashFunction(key);
   unsigned int startIndex = index;
+  bool rehashed = false;
+
   while (table[index] != nullptr) {
+    if (table[index]->key == key) {
+      table[index]->value = value;
+      return;
+    }
     index = (index + 1) % capacity;
     if (index == startIndex) {
-      throw runtime_error("Hash table is full.");
+      rehash();
+      rehashed = true;
+      break;
     }
   }
-  table[index] = new hashNode{key, value};
+
+  if (!rehashed) {
+    table[index] = new hashNode{key, value};
+  } else {
+    add(key, value);
+  }
+}
+
+template <typename K, typename V>
+void hashTable<K, V>::rehash() {
+  vector<hashNode*> oldTable = table;
+  table = vector<hashNode*>(capacity * 2, nullptr);
+  capacity *= 2;
+
+  for (int i = 0; i < oldTable.size(); i++) {
+    if (oldTable[i] != nullptr) {
+      unsigned int index = hashFunction(oldTable[i]->key);
+      while (table[index] != nullptr) {
+        index = (index + 1) % capacity;
+      }
+      table[index] = oldTable[i];
+    }
+  }
 }
 
 template <typename K, typename V>
