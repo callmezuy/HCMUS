@@ -52,40 +52,40 @@
 \setlength {\marginparwidth }{2cm} 
 \begin{document}
 \begin{titlepage}
-\begin{center}
-\textbf{\LARGE Vietnam National University,}\\[0.5cm] 
-\textbf{\LARGE Ho Chi Minh City}\\[0.5cm] 
-\vspace{20pt}
-\textbf{\large UNIVERSITY OF SCIENCE}\\[0.2cm]
-\textbf{\large FACULTY OF INFORMATION TECHNOLOGY}\\[0.2cm]
-\vspace{20pt}
-\includegraphics[width=0.5\textwidth,keepaspectratio]{images/logo.png}
+  \begin{center}
+    \textbf{\LARGE Vietnam National University,}\\[0.5cm]
+    \textbf{\LARGE Ho Chi Minh City}\\[0.5cm]
+    \vspace{20pt}
+    \textbf{\large UNIVERSITY OF SCIENCE}\\[0.2cm]
+    \textbf{\large FACULTY OF INFORMATION TECHNOLOGY}\\[0.2cm]
+    \vspace{20pt}
+    \includegraphics[width=0.5\textwidth,keepaspectratio]{images/logo.png}
 
-\par
-\vspace{20pt}
-\textbf{\Large CSC10004 - Data Structure And Algorithms}\\
-\vspace{15pt}
-\myrule[1pt][7pt]
-\textbf{\LARGE EXERCISE I REPORT}\\
-\vspace{15pt}
-\textbf{\large Implementing Stack and Queue from scratch}\\
-\vspace{10pt}
-\myrule[1pt][7pt]
-\vspace{25pt}
-\textbf{\large Student Name \hspace{20pt} Student ID}\\
-Bui Minh Duy \hspace{45pt} 23127040 \\ 
+    \par
+    \vspace{20pt}
+    \textbf{\Large CSC10004 - Data Structure And Algorithms}\\
+    \vspace{15pt}
+    \myrule[1pt][7pt]
+    \textbf{\LARGE EXERCISE I REPORT}\\
+    \vspace{15pt}
+    \textbf{\large Implementing Stack and Queue from scratch}\\
+    \vspace{10pt}
+    \myrule[1pt][7pt]
+    \vspace{25pt}
+    \textbf{\large Student Name \hspace{20pt} Student ID}\\
+    Bui Minh Duy \hspace{45pt} 23127040 \\
 
-\vspace{45pt}
-\textbf {\large Lecturer in charge:}\\[0.2cm]
-\Large {Bui Duy Dang}\\[0.1cm]
-\Large {Nguyen Thanh Tinh}\\[0.1cm]
-\end{center}
+    \vspace{45pt}
+    \textbf {\large Lecturer in charge:}\\[0.2cm]
+    \Large {Bui Duy Dang}\\[0.1cm]
+    \Large {Nguyen Thanh Tinh}\\[0.1cm]
+  \end{center}
 
-\par
-\vfill
-\begin{center}
-\text{16/06/2024}\\
-\end{center}
+  \par
+  \vfill
+  \begin{center}
+    \text{16/06/2024}\\
+  \end{center}
 
 \end{titlepage}
 
@@ -93,18 +93,18 @@ Bui Minh Duy \hspace{45pt} 23127040 \\
 
 \pagebreak
 \section{Experiment Details}
-\input{stack.tex}
-\input{queue.tex}
+\input{tex/stack.tex}
+\input{tex/queue.tex}
 
 \pagebreak
 \section{Recursive versions}
-\input{recursive_stack.tex}
-\input{recursive_queue.tex}
+\input{tex/recursive_stack.tex}
+\input{tex/recursive_queue.tex}
 
 \subsection{Conclusion}
 \begin{itemize}
-    \item Though Loop version and Recursive Version have the same theoretical time complexity of O(n), the actual execution time shows that Loop version is faster in all cases.
-    \item When working with large data sets, the Loop version still executes as normal, but the Recursive version might encounter Stack Overflow.
+  \item Though Loop version and Recursive Version have the same theoretical time complexity of O(n), the actual execution time shows that Loop version is faster in all cases.
+  \item When working with large data sets, the Loop version still executes as normal, but the Recursive version might encounter Stack Overflow.
 \end{itemize}
 
 \pagebreak
@@ -113,32 +113,30 @@ Bui Minh Duy \hspace{45pt} 23127040 \\
   \renewcommand{\arraystretch}{1.5}
   \begin{tabular}{|l|p{\dimexpr0.6\linewidth-2\tabcolsep}|c|}
     \hline
-    \textbf{No.} & \textbf{Details}            & \textbf{Score} \\ \hline
-    1            & Stack Array                 & 100\%          \\ \hline
-    2            & Stack Linked List           & 100\%          \\ \hline
-    3            & Queue Array                 & 100\%          \\ \hline
-    4            & Queue Linked List           & 100\%          \\ \hline
-    5            & Recursive versions          & 100\%          \\ \hline
-    6            & Report                      & 100\%          \\ \hline
-                 & \textbf{Overall}            & \textbf{100\%} \\ \hline
+    \textbf{No.} & \textbf{Details}   & \textbf{Score} \\ \hline
+    1            & Stack Array        & 100\%          \\ \hline
+    2            & Stack Linked List  & 100\%          \\ \hline
+    3            & Queue Array        & 100\%          \\ \hline
+    4            & Queue Linked List  & 100\%          \\ \hline
+    5            & Recursive versions & 100\%          \\ \hline
+    6            & Report             & 100\%          \\ \hline
+                 & \textbf{Overall}   & \textbf{100\%} \\ \hline
   \end{tabular}
 \end{center}
 
 \section{Exercise Feedback}
 \subsection{What I learned}
 \begin{flushleft}
-\begin{itemize}
+  \begin{itemize}
     \item Better understanding about the internal processing of stack and queue.
-    \item How to use function templates in C++. 
-\end{itemize}
+    \item How to use function templates in C++.
+  \end{itemize}
 \end{flushleft}
 \subsection{What was difficult}
 \begin{flushleft}
-\begin{itemize}
+  \begin{itemize}
     \item The approach of using recursion is quite challenging, it took a significant amount of time and effort to complete the set-up.
-\end{itemize}
+  \end{itemize}
 \end{flushleft}
-
-\end{document}
 
 \end{document}
