@@ -1,7 +1,10 @@
 #pragma once
 
+#include <iomanip>
+#include <iostream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 template <typename K, typename V>
@@ -17,6 +20,7 @@ struct hashTable {
 
   void init(unsigned int hashSize);
   void release();
+  void display();
   unsigned int hashFunction(int key);
   unsigned int hashFunction(string key);
   void add(K key, V value);
