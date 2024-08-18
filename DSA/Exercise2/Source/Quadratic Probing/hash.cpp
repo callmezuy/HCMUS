@@ -51,13 +51,14 @@ template <typename K, typename V>
 unsigned int hashTable<K, V>::hashFunction(string key) {
   const int p = 31;
   const int m = 1e9 + 9;
-  long long hash = 0;
-  long long pPow = 1;
+  unsigned long long hash = 0;
+  unsigned long long p_pow = 1;
 
   for (char c : key) {
-    hash = (hash + (c - 'a' + 1) * pPow) % m;
-    pPow = (pPow * p) % m;
+    hash = (hash + (c * p_pow) % m) % m;
+    p_pow = (p_pow * p) % m;
   }
+
   return hash % capacity;
 }
 

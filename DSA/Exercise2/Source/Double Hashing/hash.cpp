@@ -51,14 +51,25 @@ template <typename K, typename V>
 unsigned int hashTable<K, V>::hashFunction(string key) {
   const int p = 31;
   const int m = 1e9 + 9;
-  long long hash = 0;
-  long long pPow = 1;
+  unsigned long long hash = 0;
+  unsigned long long p_pow = 1;
 
   for (char c : key) {
-    hash = (hash + (c - 'a' + 1) * pPow) % m;
-    pPow = (pPow * p) % m;
+    hash = (hash + (c * p_pow) % m) % m;
+    p_pow = (p_pow * p) % m;
   }
+
   return hash % capacity;
+}
+
+template <typename K, typename V>
+unsigned int hashTable<K, V>::doubleHashFunction(int key) {
+  return 1 + (key % (capacity - 1));
+}
+
+template <typename K, typename V>
+unsigned int hashTable<K, V>::doubleHashFunction(string key) {
+  return 1 + (key.length() % (capacity - 1));
 }
 
 template <typename K, typename V>
@@ -76,7 +87,7 @@ void hashTable<K, V>::add(K key, V value) {
       table[index]->value = value;
       return;
     }
-    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    index = (startIndex + i * doubleHashFunction(key)) % capacity;
     i++;
     if (index == startIndex) {
       rehash();
@@ -100,8 +111,8 @@ void hashTable<K, V>::rehash() {
       unsigned int startIndex = index;
       int j = 1;
       while (table[index] != nullptr) {
-        index = (startIndex + (1 + j * (oldTable[i]->key % (capacity - 1)))) %
-                capacity;
+        index =
+            (startIndex + j * doubleHashFunction(oldTable[i]->key)) % capacity;
         j++;
       }
       table[index] = oldTable[i];
@@ -119,7 +130,7 @@ V* hashTable<K, V>::searchValue(K key) {
   unsigned int startIndex = index;
   int i = 1;
   while (table[index] != nullptr && table[index]->key != key) {
-    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    index = (startIndex + i * doubleHashFunction(key)) % capacity;
     i++;
     if (index == startIndex) {
       return nullptr;
@@ -141,7 +152,7 @@ void hashTable<K, V>::removeKey(K key) {
   unsigned int startIndex = index;
   int i = 1;
   while (table[index] != nullptr && table[index]->key != key) {
-    index = (startIndex + (1 + i * (key % (capacity - 1)))) % capacity;
+    index = (startIndex + i * doubleHashFunction(key)) % capacity;
     i++;
     if (index == startIndex) {
       return;

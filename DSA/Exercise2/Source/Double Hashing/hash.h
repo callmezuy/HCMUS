@@ -22,6 +22,8 @@ struct hashTable {
   void display();
   unsigned int hashFunction(int key);
   unsigned int hashFunction(string key);
+  unsigned int doubleHashFunction(int key);
+  unsigned int doubleHashFunction(string key);
   void add(K key, V value);
   void rehash();
   V* searchValue(K key);

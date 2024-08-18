@@ -1,0 +1,6 @@
+\section{How I implemented the requirements}
+\begin{itemize}
+	\item At first, when implemented these hash tables, I found that in some specific cases, the hash table is not full but the insertion operation is failed. This is because the hash table is not rehashed when the load factor is greater than 0.5. Therefore, I have added the rehashing operation to the insertion operation.
+	\item For the chaining using AVL tree, I have implemented the AVL tree from scratch. The AVL tree is a self-balancing binary search tree, so it is more efficient than the linked list in terms of searching and inserting operations. However, the AVL tree is much more complex than the linked list, so the AVL tree is slower than the linked list in terms of inserting operation.
+	\item On dealing with string keys, I have used a specific hash function based on the hint in the requirements.
+\end{itemize}

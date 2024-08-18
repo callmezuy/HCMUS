@@ -1,0 +1,68 @@
+\documentclass[a4paper, 12pt]{article}
+
+% \usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{subfig}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\usepackage[english]{babel}
+\usepackage{indentfirst,setspace,subcaption}
+\usepackage{amsmath,amssymb,graphicx,xcolor,url}
+\usepackage{fancyhdr,tocbasic,titlesec,minted,listings}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+\usepackage[colorlinks=true,allcolors=blue,urlcolor=magenta]{hyperref}
+
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{relsize}
+
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{xparse}
+\NewDocumentCommand{\myrule}{O{1pt} O{2pt} O{black}}{%
+  \par\nobreak%
+  \kern\the\prevdepth%
+  \kern#2
+  {\color{#3}\hrule height #1 width\hsize}
+  \kern#2
+  \nointerlineskip%
+}
+\usepackage[section]{placeins}
+
+\usepackage{booktabs}
+\usepackage{colortbl}%
+   \newcommand{\myrowcolour}{\rowcolor[gray]{0.925}}
+   
+
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[R]{\nouppercase\rightmark\hfill~Exercise 2 Report}
+\fancyfoot[C]{\hfill\thepage\hfill}
+
+\DeclareTOCStyleEntry[
+  indent=12pt,
+  level=1
+]{largetocline}{section}
+
+\setlength{\marginparwidth}{2cm} 
+\begin{document}
+
+\input{content/title.tex}
+
+\tableofcontents\thispagestyle{empty}
+
+\pagebreak
+
+\input{content/studentInfo.tex}
+\input{content/method.tex}
+\input{content/experiments.tex}
+\input{content/evaluation.tex}
+\input{content/feedback.tex}
+\input{content/references.tex}
+
+\end{document}
